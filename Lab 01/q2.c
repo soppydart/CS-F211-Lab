@@ -4,25 +4,21 @@
 
 bool check(int *a, int n, int *b, int q)
 {
-	bool flag = false;
 	int i = 0, j = 0;
-	int *b0 = b;
 	while(i<n && j<q)
 	{
-		if(a[i] == b[i])
+		if(a[i] == b[j])
 		{
-			a++;
-			b++;
-			flag = true;
+			i++;
+			j++;
 		}
 		else
 		{
-			a++;
-			b = b0;
-			flag == false;
+			i++;
+			j = 0;
 		}
 	}
-	if(j == q && flag)
+	if(j == q)
 		return true;
 	else
 		return false;
@@ -41,14 +37,14 @@ int main()
 {
 	int m,n,p,q;
 	scanf("%d%d",&m,&n);
-	int **a = malloc(m*sizeof(int));
+	int **a = malloc(m*sizeof(int*));
 	for(int i=0;i<m;i++)
 		a[i] = malloc(n*sizeof(int));
 	for(int i=0;i<m;i++)
 	for(int j=0;j<n;j++)
 	scanf("%d",&a[i][j]);
 	scanf("%d%d",&p,&q);
-	int **b = malloc(p*sizeof(int));
+	int **b = malloc(p*sizeof(int*));
 	for(int i=0;i<q;i++)
 		b[i] = malloc(n*sizeof(int));
 	for(int i=0;i<p;i++)
@@ -58,8 +54,8 @@ int main()
 	int rowMatch = 0, colMatch = 0;
 	for(int i=0;i<m;i++)
 	{
-		if(i<n)
-		if(check(a[i],n,b[i],q))
+		if(rowMatch<p)
+		if(check(a[i],n,b[rowMatch],q))
 			rowMatch++;
 	}
 	
@@ -68,8 +64,8 @@ int main()
 	
 	for(int i=0;i<n;i++)
 	{
-		if(i<m)
-		if(check(a[i],m,b[i],p))
+		if(colMatch<q)
+		if(check(a[i],m,b[colMatch],p))
 			colMatch++;
 	}
 	
