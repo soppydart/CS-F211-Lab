@@ -159,7 +159,6 @@ Node *addNext(Node *head, Node *cur, int n)
     if (cur->data == n)
         return head;
     head = removeFromList(head, n);
-    printList(head);
     if (cur->next == NULL)
         addToList(head, n);
     else
@@ -171,7 +170,6 @@ Node *addNext(Node *head, Node *cur, int n)
         nptr->next = ptr;
         ptr->prev = nptr;
     }
-    printList(head);
     return head;
 }
 
