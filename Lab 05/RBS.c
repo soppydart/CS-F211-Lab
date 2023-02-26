@@ -25,9 +25,7 @@ int main()
     int n;
     scanf("%d", &n);
     char *arr = malloc((n) * sizeof(char));
-    int left, right;
-    left = right = n / 2;
-    solve(arr, left, right, 0);
+    solve(arr, n / 2, n / 2, 0);
 
     return 0;
 }
