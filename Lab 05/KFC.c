@@ -1,33 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-void bubbleSort(int *arr, int n, int type)
-{
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n - i - 1; j++)
-        {
-            if (type == 1)
-            {
-                if (arr[j] < arr[j + 1])
-                {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-            }
-            else
-            {
-                if (arr[j] > arr[j + 1])
-                {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-            }
-        }
-    }
-}
+#include <limits.h>
 
 int findMax(int *arr, int n)
 {
@@ -40,22 +13,23 @@ int findMax(int *arr, int n)
     return max;
 }
 
-int solve(int *arr, int n, int k)
+int solve(int *arr, int n, int k, int *split, int index, int min)
 {
-    int *sum = calloc(k, sizeof(int));
-    bubbleSort(arr, n, 1);
-    int indexN = 0, indexK = 0;
-    while (indexN != n - n % k)
+    if (index == n)
     {
-        sum[indexK++] += arr[indexN++];
-        if (indexK == k)
-            indexK = 0;
+        if (findMax(split, k) < min)
+            min = findMax(split, k);
     }
-    indexK = 0;
-    bubbleSort(sum, k, 0);
-    for (int i = indexN; i < n; i++)
-        sum[indexK++] += arr[i];
-    return findMax(sum, k);
+    else
+    {
+        for (int i = 0; i < k; i++)
+        {
+            split[i] += arr[index];
+            min = solve(arr, n, k, split, index + 1, min);
+            split[i] -= arr[index];
+        }
+    }
+    return min;
 }
 
 int main()
@@ -65,7 +39,8 @@ int main()
     int *arr = malloc(n * sizeof(int));
     for (int i = 0; i < n; i++)
         scanf("%d", &arr[i]);
-    printf("%d\n", solve(arr, n, k));
+    int *split = calloc(k, sizeof(int));
+    printf("%d\n", solve(arr, n, k, split, 0, INT_MAX));
 
     return 0;
 }
