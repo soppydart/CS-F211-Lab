@@ -22,8 +22,18 @@ int main()
             st.pop();
             popCount++;
         }
-        pass[i % n] = st.empty() ? -1 : popCount + 1;
-        st.push(arr[i]);
+        if (st.empty())
+        {
+            pass[i] = -1;
+            st.push(arr[i]);
+        }
+        else
+        {
+            int a = popCount + 1;
+            pass[i] = a;
+            while (a--)
+                st.push(arr[i]);
+        }
     }
     for (int i = 0; i < n; i++)
         cout << pass[i] << " ";
