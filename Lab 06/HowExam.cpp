@@ -15,8 +15,18 @@ int *prevSmaller(int *arr, int n)
             c++;
             st.pop();
         }
-        ps[i] = st.empty() ? -1 : i - 1 - c;
-        st.push(arr[i]);
+        if (st.empty())
+        {
+            ps[i] = -1;
+            st.push(arr[i]);
+        }
+        else
+        {
+            ps[i] = i - 1 - c;
+            c++;
+            while (c--)
+                st.push(arr[i]);
+        }
     }
     return ps;
 }
@@ -34,8 +44,18 @@ int *nextSmaller(int *arr, int n)
             c++;
             st.pop();
         }
-        ns[i] = st.empty() ? n : i + 1 + c;
-        st.push(arr[i]);
+        if (st.empty())
+        {
+            ns[i] = n;
+            st.push(arr[i]);
+        }
+        else
+        {
+            ns[i] = i + 1 + c;
+            c++;
+            while (c--)
+                st.push(arr[i]);
+        }
     }
     return ns;
 }
