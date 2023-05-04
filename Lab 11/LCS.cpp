@@ -1,14 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int solve(vector<int> a, vector<int> b, int i, int j)
+int lcs(vector<int> a, vector<int> b, int m, int n)
 {
-    if (i >= a.size() || j > b.size())
-        return 0;
-    if (a[i] == b[j])
-        return 1 + solve(a, b, i + 1, j + 1);
-    else
-        return max(solve(a, b, i + 1, j), solve(a, b, i, j + 1));
+    int dp[m + 1][n + 1];
+
+    for (int j = 0; j < n + 1; j++)
+        dp[0][j] = 0;
+    for (int i = 0; i < m + 1; i++)
+        dp[i][0] = 0;
+    int ans = 0;
+    for (int i = 1; i <= m; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (a[i - 1] == b[j - 1])
+            {
+                dp[i][j] = 1 + dp[i - 1][j - 1];
+                ans = max(ans, dp[i][j]);
+            }
+            else
+                dp[i][j] = 0;
+        }
+    }
+    return ans;
 }
 
 int main()
@@ -23,7 +38,7 @@ int main()
     for (int i = 0; i < m; i++)
         cin >> b[i];
 
-    cout << solve(a, b, 0, 0) << endl;
+    cout << lcs(a, b, m, n) << endl;
 
     return 0;
 }
