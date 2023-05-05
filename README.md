@@ -10,3 +10,5 @@ Contains code for CS-F211 (Data Structures and Algorithms) Lab
 - [Lab Sheet 6](https://github.com/soppydart/CS-F211-Lab/files/11183893/CS_F211___Week6-6-merged.pdf)
 - [Lab Sheet 7](https://github.com/soppydart/CS-F211-Lab/files/11183894/CS_F211___Week7-1-merged.pdf)
 - [Lab Sheet 8](https://github.com/soppydart/CS-F211-Lab/files/11224810/CS.F211.Lab.8.2.pdf)
+- [Lab Sheet 9](https://github.com/soppydart/CS-F211-Lab/files/11408591/CS_F211___Week9-merged.pdf)
+- [Lab Sheet 11](https://github.com/soppydart/CS-F211-Lab/files/11408592/CS_F211___Week11-1-merged.pdf)
